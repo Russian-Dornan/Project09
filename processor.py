@@ -7,6 +7,7 @@ import collision
 from main import item
 # 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
 # 1:[0, 1,   2 ,   3    ,    4   ,   5 ,   6    ]
+
 def Item_Update(massive, n):
     result=collision.IsCollied(massive, n)
     if result==0:

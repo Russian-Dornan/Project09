@@ -5,8 +5,7 @@ import parameters as par
 
 pygame.init() #Просто запуск pygame
 
-wide=1200
-hight=700
+
 win = pygame.display.set_mode((wide, hight))    # Создание окна !win! 1200*700
 size_stand=24
 font = pygame.font.SysFont("", size_stand, 'utf-8')     #Создание Шрифта
