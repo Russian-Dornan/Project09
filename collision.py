@@ -1,5 +1,5 @@
 import pygame
-from main import item
+
 def IsCollied(massive, n):
 
 

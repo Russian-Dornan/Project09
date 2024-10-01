@@ -3,6 +3,7 @@ import pygame
 import test
 import draw
 import parameters as par
+import processor as proc
 
 pygame.init() #Просто запуск pygame
 
@@ -19,7 +20,7 @@ fps=60
 
 speed=10000
 
-item={1: [100, 100, 20, 0, 0, 10, par.RED]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
+item={1: [100, 100, 20, 0.2, 0.1, 10, par.RED]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
 
 while Work:
     cloak.tick(fps * speed);  # Контроль фпс
@@ -30,5 +31,5 @@ while Work:
 
     for i in item:
         draw.DrawItem(item[i], win)
-
+        proc.Item_Update(item, i)
     pygame.display.update();    #Обновление экрана
