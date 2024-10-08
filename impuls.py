@@ -1,4 +1,4 @@
-from main import item
+
 import parameters as par
 # Реализуй расчет скорости, не забудь обновить скорость у объекта, с  которым столкнулся
 # Пример реализации item.update({nomber:[item[x, y, speedX....]]})
