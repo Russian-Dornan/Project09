@@ -4,11 +4,13 @@ import parameters as par
 import gravity
 import mooving
 import collision
-from main import item
+
 # 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
 # 1:[0, 1,   2 ,   3    ,    4   ,   5 ,   6    ]
 
-def Item_Update(massive, n):
+def Item_Update(item, n):
+    massive=item[n]
+
     result=collision.IsCollied(massive, n)
     if result==0:
         None
@@ -28,4 +30,4 @@ def Item_Update(massive, n):
 
     massive[0], massive[1] = mooving.ChangePosition(massive[0], massive[1], massive[3], massive[4]);
 
-    return massive
+    item[n]=massive
