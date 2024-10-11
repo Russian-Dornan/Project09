@@ -8,14 +8,13 @@ def DrawItem(mass, win):
 
         pygame.draw.rect(win, mass[6], (mass[0], mass[1], mass[2], mass[2]))
 
-def GetButton(x, y, width, height, text, win):
-    font = pygame.font.SysFont(None, 15)
+def GetButton(x, y, width, height, text, win, font):
     text = font.render(text, True, par.BLACK)
     button_surface = pygame.Surface((width, height))
     text_rect = text.get_rect(center=(button_surface.get_width() /2, button_surface.get_height()/2))
     button_rect = pygame.Rect(x, y, width, height)
     button_surface.fill(par.WHITE)
-    ChangeColor(button_rect, button_surface)
+    #ChangeColor(button_rect, button_surface)
     button_surface.blit(text, text_rect)
     win.blit(button_surface, (button_rect.x, button_rect.y))
     return button_rect
