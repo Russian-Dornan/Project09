@@ -11,16 +11,14 @@ import collision
 def Item_Update(item, n):
     massive=item[n]
 
-    result=collision.IsCollied(massive, n)
+    result=collision.IsCollied(n,item)
     if result==0:
         None
-    elif result==1:#столкновение с верхней и нижней стенкой
-        massive[4], massive[1]=walls.Reverse(massive[4], massive[1]);
-    elif result==2: # Столкновение с правой и левой стенкой
-        massive[3], massive[0] = walls.Reverse(massive[3], massive[0])
     elif result>10: # Столкновение объектов верхом
+
         massive[4], massive[1] = impuls.SpeedCalculate_y(massive[4], massive[1], result//10);
     elif result<-10:
+
         massive[3], massive[0] = impuls.SpeedCalculate_x(massive[3], massive[0], result//(-10))
 
     if(par.GravityType==1):

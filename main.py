@@ -20,7 +20,7 @@ fps=60
 
 speed=10000
 
-item={1: [100, 100, 20, 0.2, 0.1, 10, par.RED]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
+item={1: [100, 100, 20, 0.1, 0, 10, par.RED], 21: [500, 100, 20, 0, 0, 10, par.WHITE]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
 
 menu=1#1-Главное меню, 2 - создание объекта, 3 - натсройки физики
 #4 - настройки приложения, 5 - Экстра функции
@@ -53,7 +53,7 @@ while Work:
             elif buttons_main_menu[3]:#Настройки физики
                 None
             elif buttons_main_menu[4]:#Настройки приложения
-                None
+                menu=3
             elif buttons_main_menu[5]:#Экстра
                 None
             elif buttons_main_menu[6]:#Выбрать
@@ -72,6 +72,8 @@ while Work:
     if (tick%20==0):
         if(menu==1):
             buttons_main_menu = MainMenu(win, font)
+        elif(menu==3):
+            None
         pygame.display.update();    #Обновление экрана
 
 pygame.quit()
