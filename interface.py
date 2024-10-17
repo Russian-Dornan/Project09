@@ -76,7 +76,7 @@ def CreateInputBox(win):
                         if event.key == pygame.K_BACKSPACE:
                                 user_text = user_text[:-1] 
                         else:
-                                if len(user_text) <= 5:
+                                if len(user_text) <= 5 and event.unicode in '0123456789':
                                         user_text += event.unicode
                         ObjectData[active] = user_text
 

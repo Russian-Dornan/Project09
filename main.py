@@ -30,9 +30,24 @@ tick=1
 
 buttons_main_menu=[]
 buttons_create_obj=[]
+def UpdateObjects():
+    for i in objects:
+        pygame.draw.rect(win, par.WHITE, (i[0], i[1], i[2], i[2]))
 def CreateObject(): #Метод для создания объекта(ObjectData - массив с со значениями объекта)
-    None
-
+    x, y = 0,0
+    if ObjectData[0] != '' and ObjectData[1] != '' and ObjectData[2] != '' and ObjectData[3] != '':
+        while True:
+            k = 0
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    x, y = pygame.mouse.get_pos()
+                    k = 1
+            if k == 1:
+                objects.append([x, y, int(ObjectData[0])])
+                break
+       
+        
+objects = []
 while Work:
     if tick>10000:
         tick=0
@@ -74,6 +89,7 @@ while Work:
     for i in item:
         draw.DrawItem(item[i], win)
         proc.Item_Update(item, i)
+    UpdateObjects()
     if (tick%10==0):
         if(menu==1):
             buttons_main_menu = MainMenu(win, font)
@@ -85,4 +101,3 @@ while Work:
         
 
 pygame.quit()
-
