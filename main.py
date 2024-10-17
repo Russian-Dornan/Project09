@@ -20,12 +20,14 @@ fps=60
 
 speed=10000
 
-item={1: [100, 100, 20, 0.1, 0, 10, par.RED], 21: [500, 100, 20, 0, 0, 10, par.WHITE]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
+item={-1: [100, 100, 20, 0.1, 0, 10, par.RED], -2: [500, 100, 20, 0, 0, 10, par.WHITE]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
 
 menu=1#1-Главное меню, 2 - создание объекта, 3 - натсройки физики
 #4 - настройки приложения, 5 - Экстра функции
 
 tick=1
+#Количество предметов
+nomber=3
 #Зона кнопок
 
 buttons_main_menu=[]
@@ -33,18 +35,13 @@ buttons_create_obj=[]
 def UpdateObjects():
     for i in objects:
         pygame.draw.rect(win, par.WHITE, (i[0], i[1], i[2], i[2]))
-def CreateObject(): #Метод для создания объекта(ObjectData - массив с со значениями объекта)
-    x, y = 0,0
+def CreateObject(x, y): #Метод для создания объекта(ObjectData - массив с со значениями объекта)
+    global nomber
     if ObjectData[0] != '' and ObjectData[1] != '' and ObjectData[2] != '' and ObjectData[3] != '':
-        while True:
-            k = 0
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    x, y = pygame.mouse.get_pos()
-                    k = 1
-            if k == 1:
-                objects.append([x, y, int(ObjectData[0])])
-                break
+
+        item.update({nomber:[x,y,float(ObjectData[0]), float(ObjectData[1]), float(ObjectData[2]), float(ObjectData[3]), par.WHITE]})
+        nomber+=1
+
        
         
 objects = []
@@ -79,22 +76,25 @@ while Work:
             elif buttons_main_menu[7].collidepoint(event.pos):#Выбрать
                 Work = False
         elif menu==2:
-            if buttons_create_obj[0].collidepoint(event.pos):
-                CreateObject()
-                pygame.time.delay(200)
-            elif buttons_create_obj[1].collidepoint(event.pos):
+            if buttons_create_obj[1].collidepoint(event.pos):
                 menu = 1
-                pygame.time.delay(200)
+            elif event.pos[0]<wide-otstup and event.pos[0]>0 and event.pos[1]>0 and event.pos[1]<hight:
+                
+                CreateObject(event.pos[0], event.pos[1])
+
+
                 
     for i in item:
         draw.DrawItem(item[i], win)
-        proc.Item_Update(item, i)
-    UpdateObjects()
-    if (tick%10==0):
+        if(menu==1):
+            proc.Item_Update(item, i)
+
+    #UpdateObjects()
+    if (tick%10==0 or menu!=1):
         if(menu==1):
             buttons_main_menu = MainMenu(win, font)
         elif(menu == 2):
-            buttons_create_obj = CreateObj(win, font) 
+            buttons_create_obj, menu = CreateObj(win, font)
         elif(menu==3):
             None
         pygame.display.update();    #Обновление экрана
