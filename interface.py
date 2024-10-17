@@ -107,3 +107,4 @@ def CreateInputBox(data,input_rects, win, menu):
                 text_surface = my_font.render(data[i], True, BLACK)
                 win.blit(text_surface, (input_rects[i].x+1, input_rects[i].y+1))
         return menu
+

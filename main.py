@@ -55,7 +55,7 @@ while Work:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   #Выход из программы
             Work = False
-    if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+    if event.type == pygame.MOUSEBUTTONUP and event.button == 1: #Это нужно, чтобы обработчки событий для кнопки срабатывал только при клике, а не при удерживании
         k = 0
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and k != 1:  #Обработчик событий для кнопок
         k = 1
@@ -121,3 +121,4 @@ while Work:
         
 
 pygame.quit()
+
