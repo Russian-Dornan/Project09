@@ -21,7 +21,7 @@ lawText = 'Закон тяжести'
 impulsText = 'Упругие столкновения'
 speed=10000
 
-item={-1: [100, 100, 20, 0.1, 0, 10, par.RED], -2: [500, 100, 20, 0, 0, 10, par.WHITE]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
+item={-1: [100, 300, 20, 0, 0.05, 11, par.RED], -2: [500, 300, 20, 0, 0, 100000000000, par.WHITE]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
 
 menu=1#1-Главное меню, 2 - создание объекта, 3 - натсройки физики
 #4 - настройки приложения, 5 - Экстра функции
@@ -116,7 +116,7 @@ while Work:
         elif(menu==3):
             buttons_physics_law, menu = PhysicsOption(lawText,impulsText, win, font)
         pygame.display.update();    #Обновление экрана
-        
+
 
 pygame.quit()
 

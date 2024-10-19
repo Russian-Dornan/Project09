@@ -16,15 +16,16 @@ def Item_Update(item, n):
         None
     elif result>10: # Столкновение объектов верхом
 
-        massive[4], massive[1] = impuls.SpeedCalculate_y(massive[4], massive[1], result//10);
+        #massive[4], massive[1] = impuls.SpeedCalculate_y(massive[4], massive[1], result//10);
+        None
     elif result<-10:
-
-        massive[3], massive[0] = impuls.SpeedCalculate_x(massive[3], massive[0], result//(-10))
+        None
+        #massive[3], massive[0] = impuls.SpeedCalculate_x(massive[3], massive[0], result//(-10))
 
     if(par.GravityType==1):
         massive[4]=gravity.EarthGravity(massive[4]);
     elif(par.GravityType==2):
-        massive[3], massive[4] = gravity.SpaceGravity(massive[0], massive[1], massive[3], massive[4], massive[5])
+        massive[3], massive[4] = gravity.MultiGravity(n, item)
 
     massive[0], massive[1] = mooving.ChangePosition(massive[0], massive[1], massive[3], massive[4]);
 
