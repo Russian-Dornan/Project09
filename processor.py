@@ -11,7 +11,7 @@ import collision
 def Item_Update(item, n):
     massive=item[n]
 
-    massive[0],massive[1],massive[3],massive[4] = walls.Reverse(massive[0],massive[1],massive[3],massive[4])
+    massive[0],massive[1],massive[3],massive[4] = walls.Reverse(massive[0],massive[1],massive[2],massive[3],massive[4])
 
     result=collision.IsCollied(massive, n)
     if result==0:
