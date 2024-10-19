@@ -34,9 +34,7 @@ tick=1
 buttons_main_menu=[]
 buttons_create_obj=[]
 buttons_physics_law = []
-def UpdateObjects():
-    for i in objects:
-        pygame.draw.rect(win, par.WHITE, (i[0], i[1], i[2], i[2]))
+
 def CreateObject(x, y): #Метод для создания объекта(ObjectData - массив с со значениями объекта)
     global nomber
     item.update({nomber:[x,y,float(ObjectData[0]), float(ObjectData[1]), float(ObjectData[2]), float(ObjectData[3]), par.WHITE]})
@@ -103,12 +101,12 @@ while Work:
                    par.g = float(ParametersData[0])
                    par.G = float(ParametersData[1])*10**(-11)
                    menu = 1
-    '''(Закоментил, потому что выдаёт ошибку, нехватает метода из gravity.py)
+
     for i in item:
         draw.DrawItem(item[i], win)
         if(menu==1):
             proc.Item_Update(item, i)
-    '''
+
     #UpdateObjects()
     if (tick%10==0 or menu != 1):
         if(menu==1):
