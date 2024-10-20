@@ -1,7 +1,7 @@
 from parameters import *
 import math
 def EarthGravity(Speed_y):
-    Speed_y -= g
+    Speed_y += g/100000
     return Speed_y
 def MultiGravity(nomber, item):
 

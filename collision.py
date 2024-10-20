@@ -2,6 +2,7 @@ import pygame
 
 def IsCollied(n, item):
     global regim
+
     x, y, wide, hight, Ux, Uy, weight = item[n][0], item[n][1], item[n][2], item[n][2], \
     item[n][2], item[n][5], item[n][6]
     # ITEM_X = pygame.Rect(x + wide // 2 - 3, y, wide // 2, hight)
