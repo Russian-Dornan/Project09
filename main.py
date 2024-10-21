@@ -21,8 +21,8 @@ lawText = 'Закон тяжести'
 impulsText = 'Упругие столкновения'
 speed=10000
 
-item={1: [300, 500, 20, 0.05, 0, 2000000000, par.RED], 2: [500, 300, 20, 0.05, 0, 11, par.WHITE], 3: [600, 600, 20, 0, 0, 20000000000, par.RED]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
-
+#item={1: [300, 500, 20, 0.05, 0, 2000000000, par.RED], 2: [500, 300, 20, 0.05, 0, 11, par.WHITE], 3: [600, 600, 20, 0, 0, 20000000000, par.RED]}# 1:[x, y, size, Speed_x, Speed_y, mass, Color, ]
+item={}
 menu=1#1-Главное меню, 2 - создание объекта, 3 - натсройки физики
 #4 - настройки приложения, 5 - Экстра функции
 
@@ -49,7 +49,19 @@ while Work:
     cloak.tick(fps * speed);  # Контроль фпс
     win.fill(background_color)
 
-
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        for i in item:
+            item[i][0]+=1
+    if keys[pygame.K_RIGHT]:
+        for i in item:
+            item[i][0]-=1
+    if keys[pygame.K_UP]:
+        for i in item:
+            item[i][1]+=1
+    if keys[pygame.K_DOWN]:
+        for i in item:
+            item[i][1]-=1
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   #Выход из программы
             Work = False
@@ -62,12 +74,25 @@ while Work:
                 menu = 2
                 pygame.time.delay(200)
             elif buttons_main_menu[1].collidepoint(event.pos):#Добавить
-                None
+                f = open('input.txt')
+                for line in f:
+                    etem = line.split()
+
+                    item.update({nomber: [eval(etem[0]), eval(etem[1]), eval(etem[2]), eval(etem[3])/10,
+                                           eval(etem[4]) , eval(etem[5]) , par.STANDART]})
+                    nomber += 1
+                f.close()
             elif buttons_main_menu[2].collidepoint(event.pos):#Импорт
                 menu = 3
                 pygame.time.delay(200)
             elif buttons_main_menu[3].collidepoint(event.pos):#Настройки физики
-                None
+                while item!={}:
+
+                        try:
+                            for i in item:
+                                item.pop(i)
+                        except:
+                            None
             elif buttons_main_menu[4].collidepoint(event.pos):#Настройки приложения
                 None
             elif buttons_main_menu[5].collidepoint(event.pos):#Экстра
