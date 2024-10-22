@@ -10,6 +10,10 @@ STANDART=(40, 40, 220)
 wide=1200
 hight=700
 otstup=250
+#
+is_vectors=-1#1 - рисовать
+is_follow=-1
+pause=-1
 
 FormType=1#1-квадрат, 2 - круг
 ImpulsType=1#1-упругий(отлетают), 2 - неупрогий(слипаются как пластелин)

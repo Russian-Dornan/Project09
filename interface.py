@@ -34,8 +34,8 @@ def MainMenu(win, font):
                 draw.GetButton(975, 70, 200, 50, 'Импорт сценария', win, font),
                 draw.GetButton(975, 130, 200, 50, 'Настройки физики', win, font),
                 draw.GetButton(975, 190, 200, 50, "Очистить всё", win, font),
-                draw.GetButton(975, 250, 200, 50, 'Экстра функции', win, font),
-                draw.GetButton(975, 310, 200, 50, 'Выбрать объект', win, font),
+                draw.GetButton(975, 250, 200, 50, 'Векторы', win, font),
+                draw.GetButton(975, 310, 200, 50, 'Пауза', win, font),
                 draw.GetButton(975, 370, 200, 50, 'Следовать', win, font),
                 draw.GetButton(975, 430, 200, 50, 'Выход', win, font)
                 ]

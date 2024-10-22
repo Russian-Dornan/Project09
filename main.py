@@ -2,6 +2,7 @@
 import pygame
 import test
 import draw
+
 import parameters as par
 import processor as proc
 from interface import *
@@ -11,7 +12,7 @@ pygame.init() #Просто запуск pygame
 win = pygame.display.set_mode((par.wide, par.hight))    # Создание окна !win! 1200*700
 size_stand=16
 font = pygame.font.SysFont("", size_stand, '')     #Создание Шрифта
-
+font_speed=pygame.font.SysFont("", 30, '')
 Work=True   #Рабочий цикл(не относится к pygame)
 cloak=pygame.time.Clock()   #Создание функции контроля фпс
 #Параметры программы
@@ -28,6 +29,9 @@ menu=1#1-Главное меню, 2 - создание объекта, 3 - на�
 
 #Количество предметов
 nomber=3
+chosen_one=-10
+follow_one=-1
+
 
 tick=1
 #Зона кнопок
@@ -39,7 +43,16 @@ def CreateObject(x, y): #Метод для создания объекта(Objec
     global nomber
     item.update({nomber:[x,y,float(ObjectData[0]), float(ObjectData[1]), float(ObjectData[2]), float(ObjectData[3]), par.WHITE]})
     nomber+=1
-       
+def Following(x, y):
+
+
+    delta_x = x - par.wide // 2
+    delta_y = y - par.hight // 2
+    if delta_x!=0 or delta_y!=0:
+        for i in item:
+            item[i][0]-=delta_x
+            item[i][1]-=delta_y
+
 k = 0       
 objects = []
 while Work:
@@ -69,7 +82,9 @@ while Work:
         k = 0
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and k != 1:  #Обработчик событий для кнопок
         k = 1
+        mouse_pos = event.pos
         if menu==1:
+
             if buttons_main_menu[0].collidepoint(event.pos):
                 menu = 2
                 pygame.time.delay(200)
@@ -93,12 +108,14 @@ while Work:
                                 item.pop(i)
                         except:
                             None
-            elif buttons_main_menu[4].collidepoint(event.pos):#Настройки приложения
-                None
+            elif buttons_main_menu[4].collidepoint(event.pos):#Векторы
+                par.is_vectors*=-1
             elif buttons_main_menu[5].collidepoint(event.pos):#Экстра
-                None
+                par.pause*=-1
             elif buttons_main_menu[6].collidepoint(event.pos):#Выбрать
-                None
+                if is_follow==1:
+                    follow_one=-1
+                is_follow*=-1
             elif buttons_main_menu[7].collidepoint(event.pos):#Выбрать
                 Work = False
         elif menu==2:
@@ -129,11 +146,22 @@ while Work:
 
     for i in item:
         draw.DrawItem(item[i], win)
-        if(menu==1):
+        if pygame.Rect(item[i][0], item[i][1], item[i][2], item[i][2]).collidepoint(mouse_pos):
+            chosen_one=i
+            if(is_follow==1):
+                follow_one=i
+        if(menu==1 and par.pause==-1):
             proc.Item_Update(item, i)
+    if(follow_one!=-1):
+          Following(item[follow_one][0], item[follow_one][1])
 
     #UpdateObjects()
     if (tick%10==0 or menu != 1):
+
+        if(chosen_one!=-10):
+            win.blit((font.render(("Index "+str(chosen_one)), True, GREEN)), (10, 10))
+            win.blit((font_speed.render(("Ux = "+str(item[chosen_one][3])), True, GREEN)), (10, 20))
+            win.blit((font_speed.render(("Uy = " + str((item[chosen_one][4]))), True, GREEN)), (10, 40))
         if(menu==1):
             buttons_main_menu = MainMenu(win, font)
         elif(menu == 2):
