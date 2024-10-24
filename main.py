@@ -89,14 +89,18 @@ while Work:
                 menu = 2
                 pygame.time.delay(200)
             elif buttons_main_menu[1].collidepoint(event.pos):#Добавить
-                f = open('input.txt')
-                for line in f:
-                    etem = line.split()
-
-                    item.update({nomber: [eval(etem[0]), eval(etem[1]), eval(etem[2]), eval(etem[3])/10,
-                                           eval(etem[4]) , eval(etem[5]) , par.STANDART]})
-                    nomber += 1
-                f.close()
+                try:
+                    f = open('input.txt')
+                    for line in f:
+                        etem = line.split()
+    
+                        item.update({nomber: [eval(etem[0]), eval(etem[1]), eval(etem[2]), eval(etem[3])/10,
+                                               eval(etem[4]) , eval(etem[5]) , par.STANDART]})
+                        nomber += 1
+                    f.close()
+                except: 
+                    f = open('input.txt', 'x')
+                    f.close()
             elif buttons_main_menu[2].collidepoint(event.pos):#Импорт
                 menu = 3
                 pygame.time.delay(200)
