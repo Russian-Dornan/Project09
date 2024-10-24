@@ -75,7 +75,9 @@ while Work:
     if keys[pygame.K_DOWN]:
         for i in item:
             item[i][1]-=1
-    for event in pygame.event.get():
+    events = pygame.event.get();
+    for event in events:
+
         if event.type == pygame.QUIT:   #Выход из программы
             Work = False
     if event.type == pygame.MOUSEBUTTONUP and event.button == 1: #Это нужно, чтобы обработчки событий для кнопки срабатывал только при клике, а не при удерживании
@@ -87,7 +89,6 @@ while Work:
 
             if buttons_main_menu[0].collidepoint(event.pos):
                 menu = 2
-                pygame.time.delay(200)
             elif buttons_main_menu[1].collidepoint(event.pos):#Добавить
                 try:
                     f = open('input.txt')
@@ -101,9 +102,9 @@ while Work:
                 except: 
                     f = open('input.txt', 'x')
                     f.close()
+
             elif buttons_main_menu[2].collidepoint(event.pos):#Импорт
                 menu = 3
-                pygame.time.delay(200)
             elif buttons_main_menu[3].collidepoint(event.pos):#Настройки физики
                 while item!={}:
 
@@ -123,7 +124,7 @@ while Work:
             elif buttons_main_menu[7].collidepoint(event.pos):#Выбрать
                 Work = False
         elif menu==2:
-            if buttons_create_obj[1].collidepoint(event.pos):
+            if buttons_create_obj[0].collidepoint(event.pos):
                 menu = 1
             elif event.pos[0]<wide-otstup and event.pos[0]>0 and event.pos[1]>0 and event.pos[1]<hight:
                 CreateObject(event.pos[0], event.pos[1])
@@ -155,6 +156,7 @@ while Work:
             if(is_follow==1):
                 follow_one=i
                 is_follow=-1
+
         if(menu==1 and par.pause==-1):
             proc.Item_Update(item, i)
     if(follow_one!=-1):
@@ -170,9 +172,9 @@ while Work:
         if(menu==1):
             buttons_main_menu = MainMenu(win, font)
         elif(menu == 2):
-            buttons_create_obj, menu = CreateObj(win, font)
+            buttons_create_obj, menu = CreateObj(win, font, events)
         elif(menu==3):
-            buttons_physics_law, menu = PhysicsOption(lawText,impulsText, win, font)
+            buttons_physics_law, menu = PhysicsOption(lawText,impulsText, win, font, events)
         pygame.display.update();    #Обновление экрана
 
 

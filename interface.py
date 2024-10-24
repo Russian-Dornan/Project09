@@ -41,10 +41,10 @@ def MainMenu(win, font):
                 ]
 
         return Main_Menu_Buttons
-def PhysicsOption(lawText,impulsText, win, font):
+def PhysicsOption(lawText,impulsText, win, font, events):
         GenerateOptionText(win)
         menu = 3
-        menu = CreateInputBox(ParametersData, parameters_rects, win, 3)
+        menu = CreateInputBox(ParametersData, parameters_rects, win, 3, events)
         Buttons = [
                 draw.GetButton(975, 10, 200, 30, lawText, win, font),
                 draw.GetButton(975, 50, 200, 30, impulsText, win, font),
@@ -57,13 +57,12 @@ def GenerateOptionText(win):
        win.blit(g_surface, (975, 90))
        G_surface = my_font.render('G = ', False, WHITE)
        win.blit(G_surface, (1085, 90))  
-def CreateObj(win, font):
+def CreateObj(win, font, events):
         GenerateText(win)
         menu=2
-        menu=CreateInputBox(ObjectData,input_rects, win, 2)
+        menu=CreateInputBox(ObjectData,input_rects, win, 2, events)
         Create_obj_Buttons = [
-                draw.GetButton(975, 150, 200, 50, 'Создать объект', win, font),
-                draw.GetButton(975, 210, 200, 50, 'Главное меню', win, font)
+                draw.GetButton(975, 150, 200, 50, 'Главное меню', win, font),
                 ]
         return Create_obj_Buttons, menu
 def GenerateText(win):
@@ -81,9 +80,9 @@ def GenerateText(win):
        win.blit(mass_surface, (975, 110))
 
 active = 0
-def CreateInputBox(data,input_rects, win, menu):
+def CreateInputBox(data,input_rects, win, menu, events):
         my_font = pygame.font.SysFont('Comic Sans MS', 13)
-        for event in pygame.event.get():
+        for event in events:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                         for i in range(len(input_rects)):
                                 if input_rects[i].collidepoint(event.pos):
