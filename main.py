@@ -150,6 +150,7 @@ while Work:
             chosen_one=i
             if(is_follow==1):
                 follow_one=i
+                is_follow=-1
         if(menu==1 and par.pause==-1):
             proc.Item_Update(item, i)
     if(follow_one!=-1):
