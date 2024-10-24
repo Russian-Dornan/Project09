@@ -167,8 +167,11 @@ while Work:
 
         if(chosen_one!=-10):
             win.blit((font.render(("Index "+str(chosen_one)), True, GREEN)), (10, 10))
-            win.blit((font_speed.render(("Ux = "+str(item[chosen_one][3])), True, GREEN)), (10, 20))
-            win.blit((font_speed.render(("Uy = " + str((item[chosen_one][4]))), True, GREEN)), (10, 40))
+            try:
+                win.blit((font_speed.render(("Ux = "+str(item[chosen_one][3])), True, GREEN)), (10, 20))
+                win.blit((font_speed.render(("Uy = " + str((item[chosen_one][4]))), True, GREEN)), (10, 40))
+            except:
+                chosen_one=-10
         if(menu==1):
             buttons_main_menu = MainMenu(win, font)
         elif(menu == 2):
