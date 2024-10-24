@@ -10,23 +10,24 @@ import collision
 
 def Item_Update(item, n):
     massive=item[n]
+    if(par.GravityType==1):
+        massive[0],massive[1],massive[3],massive[4] = walls.Reverse(massive[0],massive[1],massive[2],massive[3],massive[4])
 
-    result=collision.IsCollied(massive, n)
+    result=collision.IsCollied(n, item)
     if result==0:
         None
-    elif result==1:#столкновение с верхней и нижней стенкой
-        massive[4], massive[1]=walls.Reverse(massive[4], massive[1]);
-    elif result==2: # Столкновение с правой и левой стенкой
-        massive[3], massive[0] = walls.Reverse(massive[3], massive[0])
     elif result>10: # Столкновение объектов верхом
-        massive[4], massive[1] = impuls.SpeedCalculate_y(massive[4], massive[1], result//10);
+
+        massive[4], massive[1] = impuls.SpeedCalculate_y(n, result//10, item);
+
     elif result<-10:
-        massive[3], massive[0] = impuls.SpeedCalculate_x(massive[3], massive[0], result//(-10))
+
+        massive[3], massive[0] = impuls.SpeedCalculate_x(n, result//(-10), item)
 
     if(par.GravityType==1):
         massive[4]=gravity.EarthGravity(massive[4]);
     elif(par.GravityType==2):
-        massive[3], massive[4] = gravity.SpaceGravity(massive[0], massive[1], massive[3], massive[4], massive[5])
+        massive[3], massive[4] = gravity.MultiGravity(n, item)
 
     massive[0], massive[1] = mooving.ChangePosition(massive[0], massive[1], massive[3], massive[4]);
 
