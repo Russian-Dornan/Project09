@@ -41,7 +41,11 @@ buttons_physics_law = []
 
 def CreateObject(x, y): #Метод для создания объекта(ObjectData - массив с со значениями объекта)
     global nomber
-    item.update({nomber:[x,y,float(ObjectData[0]), float(ObjectData[1]), float(ObjectData[2]), float(ObjectData[3]), par.WHITE]})
+    try:
+        item.update({nomber:[x,y,float(ObjectData[0]), float(ObjectData[1]), float(ObjectData[2]), float(ObjectData[3]), par.WHITE]})
+    except:
+        #Пользователь косяк
+        None
     nomber+=1
 def Following(x, y):
 
@@ -107,7 +111,7 @@ while Work:
                 menu = 3
             elif buttons_main_menu[3].collidepoint(event.pos):#Настройки физики
                 while item!={}:
-
+                        follow_one=-1
                         try:
                             for i in item:
                                 item.pop(i)

@@ -25,7 +25,8 @@ for i in main_menu_options:
 print("]")
 '''
 ObjectData = ['', '', '', '']
-input_rects = [pygame.Rect(1010, 35, 80, 20), pygame.Rect(1035, 60, 80, 20), pygame.Rect(1035, 85, 80, 20), pygame.Rect(1010, 110, 80, 20)]
+rect_lenght=otstup-60
+input_rects = [pygame.Rect(1010, 35, rect_lenght, 20), pygame.Rect(1035, 60, rect_lenght, 20), pygame.Rect(1035, 85, rect_lenght, 20), pygame.Rect(1010, 110, rect_lenght, 20)]
 ParametersData = [str(g), str(G//(10**(-11)))]
 parameters_rects = [pygame.Rect(1000, 90, 60, 20), pygame.Rect(1115, 90, 60, 20)]
 def MainMenu(win, font):
@@ -74,7 +75,7 @@ def GenerateText(win):
        win.blit(size_surface, (975, 35))
        speedx_surface = par_font.render('Speed_x: ', False, WHITE)
        win.blit(speedx_surface, (975, 60))
-       speedy_surface = par_font.render('Speed_x: ', False, WHITE)
+       speedy_surface = par_font.render('Speed_y: ', False, WHITE)
        win.blit(speedy_surface, (975, 85))
        mass_surface = par_font.render('Mass: ', False, WHITE)
        win.blit(mass_surface, (975, 110))
@@ -98,7 +99,7 @@ def CreateInputBox(data,input_rects, win, menu, events):
                         elif event.key == pygame.K_ESCAPE:
                                 menu = 1
                         else:
-                                if len(user_text) <= 5 and event.unicode in '0123456789.':
+                                if len(user_text) <= 20 and event.unicode in '0123456789.':
                                         user_text += event.unicode
                         data[active] = user_text
         for i in range(len(input_rects)):
