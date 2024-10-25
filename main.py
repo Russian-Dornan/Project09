@@ -13,6 +13,7 @@ win = pygame.display.set_mode((par.wide, par.hight))    # Создание ок�
 size_stand=16
 font = pygame.font.SysFont("", size_stand, '')     #Создание Шрифта
 font_speed=pygame.font.SysFont("", 30, '')
+font_index=pygame.font.SysFont("", 8, '')
 Work=True   #Рабочий цикл(не относится к pygame)
 cloak=pygame.time.Clock()   #Создание функции контроля фпс
 #Параметры программы
@@ -28,7 +29,7 @@ menu=1#1-Главное меню, 2 - создание объекта, 3 - на�
 #4 - настройки приложения, 5 - Экстра функции
 
 #Количество предметов
-nomber=3
+nomber=1
 chosen_one=-10
 follow_one=-1
 
@@ -42,7 +43,7 @@ buttons_physics_law = []
 def CreateObject(x, y): #Метод для создания объекта(ObjectData - массив с со значениями объекта)
     global nomber
     try:
-        item.update({nomber:[x,y,float(ObjectData[0]), float(ObjectData[1]), float(ObjectData[2]), float(ObjectData[3]), par.WHITE]})
+        item.update({nomber:[x,y,float(ObjectData[0]), float(ObjectData[1]), float(ObjectData[2]), float(ObjectData[3]), par.STANDART]})
     except:
         #Пользователь косяк
         None
@@ -137,9 +138,12 @@ while Work:
                 if par.GravityType == 1:
                     lawText = 'Закон всемирного тяготения'
                     par.GravityType = 2
-                else:
+                elif par.GravityType==3:
                     lawText = 'Закон тяжести'
-                    par.GravityType = 1           
+                    par.GravityType = 1
+                else:
+                    lawText = 'Ничего'
+                    par.GravityType = 3
             elif buttons_physics_law[1].collidepoint(event.pos):
                if par.ImpulsType == 1:
                     impulsText = 'Неупругие столкновения'
@@ -155,6 +159,7 @@ while Work:
 
     for i in item:
         draw.DrawItem(item[i], win)
+        win.blit((font.render((str(i)), True, GREEN)), (item[i][0], item[i][1]))
         if pygame.Rect(item[i][0], item[i][1], item[i][2], item[i][2]).collidepoint(mouse_pos):
             chosen_one=i
             if(is_follow==1):

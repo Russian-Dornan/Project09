@@ -15,16 +15,20 @@ def SpeedCalculate_x(nomber, nomber2, item):
 
     weight1 = item[nomber][5]
     weight2 = item[nomber2][5]
-    Ux1 = item[nomber][3]
-    Ux2 = item[nomber2][3]
+    Ux1 = item[nomber][3]*100
+    Ux2 = item[nomber2][3]*100
     Ux=0
     if par.ImpulsType == 1:  # Упругий удар
         Ux1f = (((weight1 - weight2) * Ux1 + 2 * weight2 * Ux2) / (weight1 + weight2))
         Ux2f = ((2 * weight1 * Ux1 + (weight2 - weight1) * Ux2) / (weight1 + weight2))
 
         #item[nomber][3] = Ux1
-        item[nomber2][3] = Ux2f
-        return Ux1f, item[nomber][0]
+        item[nomber2][3] = Ux2f/100
+
+        x=item[nomber][0]
+        if(x>item[nomber2][0]): x+=1
+        else: x-=1
+        return Ux1f/100, x
     elif par.ImpulsType == 2:  # Неупругий удар
         Ux = (weight1 * Ux1 + weight2 * Ux2) / (weight1 + weight2)
 
@@ -49,8 +53,12 @@ def SpeedCalculate_y(nomber, nomber2, item):
 
         item[nomber2][4] = Uy2f/100
 
-
-        return Uy1f/100, item[nomber][1]
+        y = item[nomber][1]
+        if (y > item[nomber2][1]):
+            y += 1
+        else:
+            y -= 1
+        return Uy1f/100, y
 
     elif par.ImpulsType == 2: # Неупругий удар
         Uy = (weight1 * Uy1 + weight2 * Uy2) / (weight1 + weight2)

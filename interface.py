@@ -99,7 +99,7 @@ def CreateInputBox(data,input_rects, win, menu, events):
                         elif event.key == pygame.K_ESCAPE:
                                 menu = 1
                         else:
-                                if len(user_text) <= 20 and event.unicode in '0123456789.':
+                                if len(user_text) <= 20 and event.unicode in '0123456789.-':
                                         user_text += event.unicode
                         data[active] = user_text
         for i in range(len(input_rects)):
