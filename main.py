@@ -33,7 +33,7 @@ nomber=1
 chosen_one=-10
 follow_one=-1
 
-
+pygame.display.set_caption('Project 09')
 tick=1
 #Зона кнопок
 buttons_main_menu=[]
