@@ -83,28 +83,31 @@ def GenerateText(win):
 active = 0
 def CreateInputBox(data,input_rects, win, menu, events):
         my_font = pygame.font.SysFont('Comic Sans MS', 13)
-        for event in events:
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                        for i in range(len(input_rects)):
-                                if input_rects[i].collidepoint(event.pos):
-                                        global active
-                                        active = i
-                                        break
-                if active > len(input_rects):
-                        active = 0
-                user_text = data[active]
-                if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_BACKSPACE:
-                                user_text = user_text[:-1]
-                        elif event.key == pygame.K_ESCAPE:
-                                menu = 1
-                        else:
-                                if len(user_text) <= 20 and event.unicode in '0123456789.-':
-                                        user_text += event.unicode
-                        data[active] = user_text
-        for i in range(len(input_rects)):
-                pygame.draw.rect(win, WHITE, input_rects[i])
-                text_surface = my_font.render(data[i], True, BLACK)
-                win.blit(text_surface, (input_rects[i].x+1, input_rects[i].y+1))
+        try:
+            for event in events:
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                            for i in range(len(input_rects)):
+                                    if input_rects[i].collidepoint(event.pos):
+                                            global active
+                                            active = i
+                                            break
+                    if active > len(input_rects):
+                            active = 0
+                    user_text = data[active]
+                    if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_BACKSPACE:
+                                    user_text = user_text[:-1]
+                            elif event.key == pygame.K_ESCAPE:
+                                    menu = 1
+                            else:
+                                    if len(user_text) <= 20 and event.unicode in '0123456789.-':
+                                            user_text += event.unicode
+                            data[active] = user_text
+            for i in range(len(input_rects)):
+                    pygame.draw.rect(win, WHITE, input_rects[i])
+                    text_surface = my_font.render(data[i], True, BLACK)
+                    win.blit(text_surface, (input_rects[i].x+1, input_rects[i].y+1))
+        except:
+            None
         return menu
 
